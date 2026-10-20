@@ -1,0 +1,52 @@
+---
+import beers from '../data/beers.json';
+import { asset } from '../data/site.js';
+
+// Drawn at build time: x is ABV 4 to 8 %, y is bitterness 0 to 60 BU.
+// Each dot sits on the true value; its dog avatar is pulled aside on a leader line (offsets in beers.json "map"),
+// because Dry Lager and Witbier nearly share a spot.
+const W = 560, H = 380, L = 52, R = 24, T = 20, B = 48;
+const x = (v) => L + ((v - 4) / 4) * (W - L - R);
+const y = (v) => H - B - (v / 60) * (H - T - B);
+const ticksY = [0, 15, 30, 45, 60];
+const ticksX = [4, 5, 6, 7, 8];
+const marks = beers.map((b) => {
+  const [ax, ay, anchor] = b.map;
+  const cx = x(b.abv), cy = y(b.bu), px = cx + ax, py = cy + ay;
+  return { ...b, cx, cy, px, py, anchor, tx: anchor === 'end' ? px - 30 : px + 30 };
+});
+---
+<section class="sec map" id="taste" aria-labelledby="taste-h">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Taste map</div>
+      <h2 id="taste-h">Find <em class="g">your</em> Rottweiler.</h2>
+      <p>Strength runs left to right. Bitterness runs bottom to top. Easy and crisp sits low and left. Big and bitter sits high.</p>
+      <p>Bitterness is shown in BU, the brewer's bitterness units. Under 20 tastes gentle. Over 40 tastes properly bitter.</p>
+    </div>
+    <div class="chart">
+      <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label="Rottweiler beers by strength and bitterness">
+        <defs>
+          {marks.map((m) => <clipPath id={`cp-${m.id}`}><circle cx={m.px} cy={m.py} r="20" /></clipPath>)}
+        </defs>
+        {ticksY.map((v) => (
+          <g><line class="grid-line" x1={L} x2={W - R} y1={y(v)} y2={y(v)} /><text x={L - 10} y={y(v) + 4} text-anchor="end">{v}</text></g>
+        ))}
+        {ticksX.map((v) => <text x={x(v)} y={H - B + 20} text-anchor="middle">{v}%</text>)}
+        <text x={(L + W - R) / 2} y={H - 6} text-anchor="middle">Strength, % ABV</text>
+        <text transform={`translate(14 ${(T + H - B) / 2}) rotate(-90)`} text-anchor="middle">Bitterness, BU</text>
+        {marks.map((m) => (
+          <g>
+            <line x1={m.cx} y1={m.cy} x2={m.px} y2={m.py} stroke={m.beer} stroke-opacity=".8" />
+            <circle cx={m.cx} cy={m.cy} r="6" fill={m.beer} />
+            <circle class="avatar-bg" cx={m.px} cy={m.py} r="20" />
+            <image href={asset(`img/${m.img}.jpg`)} x={m.px - 20} y={m.py - 26} width="40" height="50" preserveAspectRatio="xMidYMid slice" clip-path={`url(#cp-${m.id})`} />
+            <circle cx={m.px} cy={m.py} r="21" fill="none" stroke={m.beer} stroke-width="2.5" />
+            <text class="lbl" x={m.tx} y={m.py - 2} text-anchor={m.anchor}>{m.persona.toUpperCase()}</text>
+            <text class="sub" x={m.tx} y={m.py + 13} text-anchor={m.anchor}>{m.name} · {m.abv.toFixed(1)}% · {m.bu} BU</text>
+          </g>
+        ))}
+      </svg>
+    </div>
+  </div>
+</section>

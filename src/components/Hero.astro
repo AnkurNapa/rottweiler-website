@@ -1,0 +1,26 @@
+---
+import beers from '../data/beers.json';
+import { asset } from '../data/site.js';
+---
+<section class="hero" aria-labelledby="hero-h">
+  <div class="glow" aria-hidden="true"></div>
+  <img class="hero-dog" src={asset('img/hero-dog.png')} alt="A Rottweiler sitting tall, outlined in white" width="665" height="888" fetchpriority="high">
+  <div class="frame" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="txt">
+      <div class="eyebrow rule">Brew and Pub · Pune · Est. 2026</div>
+      <h1 id="hero-h">Loyal to the <i>last drop.</i></h1>
+      <p class="lead">Four Rottweiler beers, from a soft 4.9% witbier to a 7.5% strong lager. Brewed calm, to one written standard.</p>
+      <div class="btns">
+        <a class="btn solid" href="#pack">Meet the beers <span aria-hidden="true">&rarr;</span></a>
+        <a class="btn ghost" href="#find">Join the pack</a>
+      </div>
+      <ul class="chips" aria-label="The four beers">
+        {beers.map((b) => (
+          <li><a href={`#beer-${b.id}`} style={`--c:${b.beer}`}><i aria-hidden="true"></i>{b.name} <b>{b.abv.toFixed(1)}%</b></a></li>
+        ))}
+      </ul>
+    </div>
+  </div>
+  <a class="cue" href="#story">Scroll</a>
+</section>

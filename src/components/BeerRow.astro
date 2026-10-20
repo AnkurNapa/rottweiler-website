@@ -1,0 +1,46 @@
+---
+import { asset, pourLink } from '../data/site.js';
+import Glass from './Glass.astro';
+
+const { beer: b } = Astro.props;
+const bubbles = [30, 52, 66];
+const t = b.theme;
+// Each band takes its beer's colour by swapping the shared tokens: surface, text, muted, line and accent.
+const band = `--c:${b.colour};--ink:${t.surface};--ink-2:${t.surface2};--cream:${t.text};--muted:${t.muted};--line:${t.line};--gold:${t.label};--gold-hi:${t.accent}`;
+---
+<article class="beer" id={`beer-${b.id}`} style={band}>
+  <div class="wrap beer-in">
+    <div class="pic">
+      <img src={asset(`img/${b.img}.jpg`)} alt={`${b.persona}, the Rottweiler for ${b.name}`} width="1136" height="1408">
+      <div class="seal" aria-hidden="true"><b>{b.abv.toFixed(1)}</b><span>% ABV</span></div>
+      <div class="persona"><span>Launching soon</span></div>
+    </div>
+    <div class="info">
+      <div class="char">{b.persona}</div>
+      <h3>Rottweiler {b.name}</h3>
+      <div class="style">{b.style}</div>
+      <p>{b.blurb}</p>
+      <div class="glassrow">
+        <Glass beer={b} />
+        <div class="specs">
+          <div><b>{b.abv.toFixed(1)}%</b><span>Alcohol</span></div>
+          <div><b>{b.bitterness}</b><span>Bitterness · {b.bu} BU</span></div>
+          <div><b>{b.colourWord}</b><span>Colour</span></div>
+        </div>
+      </div>
+      <ul class="notes">{b.notes.map((n) => <li>{n}</li>)}</ul>
+      <p class="occasion"><span>Best for</span> {b.occasion}</p>
+      <dl class="label">
+        <div><dt>Made with</dt><dd>{b.madeWith}. Contains gluten.</dd></div>
+        <div><dt>Formats</dt><dd>{b.formats.join(' · ')}</dd></div>
+        <div><dt>Keep</dt><dd>{b.keep}</dd></div>
+        <div><dt>Best within</dt><dd>{b.bestWithin}</dd></div>
+      </dl>
+      <div class="flag">{b.proof}</div>
+      <div class="row-links">
+        <a class="pill" href={asset(`beers/${b.slug}/`)}>Explore {b.name}</a>
+        <a class="pour" href={pourLink(`Rottweiler ${b.name}`)} target="_blank" rel="noopener">Tell me when it pours <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </div>
+  </div>
+</article>

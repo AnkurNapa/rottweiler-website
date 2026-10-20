@@ -1,0 +1,30 @@
+---
+import { joinLink, localLink } from '../data/site.js';
+
+// Add bars and stores here as they sign on: { name, area, type }. The list shows once it has entries.
+const outlets = [];
+---
+<section class="sec findus light" id="find" aria-labelledby="find-h">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Find us</div>
+      <h2 id="find-h">Launching in <em class="g">Pune.</em></h2>
+      {outlets.length ? (
+        <ul class="outlets">{outlets.map((o) => <li><b>{o.name}</b><span>{o.area} · {o.type}</span></li>)}</ul>
+      ) : (
+        <>
+          <p>Our first bars and stores are signing on now. They will be listed here as the taps go in.</p>
+          <p>Want Rottweiler at your local? Tell us where and we will knock on their door.</p>
+          <a class="btn line" href={localLink} target="_blank" rel="noopener">Tell us your local <span aria-hidden="true">&rarr;</span></a>
+        </>
+      )}
+    </div>
+    <div class="join">
+      <svg width="64" height="64" aria-hidden="true"><use href="#badge"/></svg>
+      <h3>Join the pack</h3>
+      <p>Be first to hear when Rottweiler pours near you, plus launch nights and new beers. One tap on WhatsApp.</p>
+      <a class="btn solid" href={joinLink} target="_blank" rel="noopener">Join on WhatsApp <span aria-hidden="true">&rarr;</span></a>
+      <p class="small">For adults of legal drinking age. By joining you agree to receive launch messages from us on WhatsApp. Send STOP at any time to leave. See our <a href="privacy/">privacy notice</a>.</p>
+    </div>
+  </div>
+</section>

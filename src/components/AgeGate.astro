@@ -1,0 +1,27 @@
+---
+import { asset } from '../data/site.js';
+import { STATES } from '../data/states.js';
+---
+<div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-h" aria-describedby="gate-d">
+  <div class="box">
+    <img src={asset('img/bite.jpg')} alt="" width="1136" height="1408">
+    <form class="in" id="gate-form" novalidate>
+      <svg width="56" height="56" aria-hidden="true"><use href="#badge"/></svg>
+      <h2 id="gate-h">The guard is on duty.</h2>
+      <p id="gate-d">This site is for adults of legal drinking age. Tell us your date of birth and where you are.</p>
+      <div class="field">
+        <label for="gate-dob">Date of birth</label>
+        <input type="date" id="gate-dob" name="dob" required>
+      </div>
+      <div class="field">
+        <label for="gate-state">State or territory</label>
+        <select id="gate-state" name="state" required>
+          <option value="">Choose one</option>
+          {STATES.map((s) => <option>{s}</option>)}
+        </select>
+      </div>
+      <button class="btn solid" type="submit">Enter</button>
+      <p class="gate-msg" id="gate-msg" role="alert" hidden></p>
+    </form>
+  </div>
+</div>

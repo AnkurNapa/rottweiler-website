@@ -1,0 +1,24 @@
+---
+import Base from '../layouts/Base.astro';
+import { contact } from '../data/site.js';
+// Draft for counsel to confirm against the Digital Personal Data Protection Act before launch.
+---
+<Base title="Privacy notice · Rottweiler Brew and Pub" description="How Rottweiler Brew and Pub handles your details." gate={false}>
+  <main class="doc light">
+    <div class="wrap">
+      <a class="back" href="../">&larr; Back to the site</a>
+      <h1>Privacy notice</h1>
+      <p>This notice explains what we collect when you contact us or join our WhatsApp list. It also explains what we do with it.</p>
+      <h2>What we collect</h2>
+      <p>When you message us on WhatsApp, we receive your phone number, your name if you share it and what you write to us. The age gate on this site does not send your date of birth or state anywhere. It stays in your own browser.</p>
+      <h2>Why we use it</h2>
+      <p>To reply to you, to send launch news if you asked to join the pack and to handle trade enquiries. We do not sell your details. We do not use them for anything you did not ask for.</p>
+      <h2>How long we keep it</h2>
+      <p>We keep your details while you are on our list or while we are dealing with your enquiry. To leave, send STOP on WhatsApp. We will remove you.</p>
+      <h2>Your choices</h2>
+      <p>You can ask to see, correct or delete what we hold about you at any time.</p>
+      <h2>Contact</h2>
+      <p>Message us on WhatsApp, or write to {contact.legalName}, {contact.office}.</p>
+    </div>
+  </main>
+</Base>

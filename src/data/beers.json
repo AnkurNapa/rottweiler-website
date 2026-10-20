@@ -1,0 +1,215 @@
+[
+  {
+    "id": "strong",
+    "img": "guardian",
+    "persona": "The Guardian",
+    "name": "Strong Lager",
+    "style": "Indian strong lager",
+    "abv": 7.5,
+    "bu": 15,
+    "ebc": 6.1,
+    "colour": "#bdbdbd",
+    "blurb": "The big dog. Full and smooth, with bready malt, a soft noble hop and no harsh alcohol bite.",
+    "notes": [
+      "Bready malt",
+      "Noble hop",
+      "Smooth warmth",
+      "Medium dry finish"
+    ],
+    "flag": "At least 30 days in the cold cellar",
+    "map": [
+      -60,
+      -10,
+      "end"
+    ],
+    "theme": {
+      "surface": "#0a0a0a",
+      "surface2": "#161616",
+      "text": "#f5f5f5",
+      "muted": "#a8a8a8",
+      "line": "#2e2e2e",
+      "label": "#d6d6d6",
+      "accent": "#ffffff"
+    },
+    "bestWithin": "9 months from packing",
+    "keep": "Store below 25°C, out of direct light",
+    "occasion": "A long, slow evening with friends, or something off the grill.",
+    "formats": [
+      "650 mL bottle",
+      "Can",
+      "Keg"
+    ],
+    "bitterness": "Low",
+    "colourWord": "Gold",
+    "madeWith": "Water, barley malt, rice, hops, yeast",
+    "proof": "Malt and rice only. At least 30 days in a cold cellar.",
+    "beer": "#e0a72e",
+    "slug": "strong-lager",
+    "tagline": [
+      "Big dog.",
+      "Smooth finish."
+    ],
+    "highlight": "Full and smooth, with bready malt and no harsh bite.",
+    "glass": "mug"
+  },
+  {
+    "id": "dry",
+    "img": "runner",
+    "persona": "The Runner",
+    "name": "Dry Lager",
+    "style": "Karakuchi dry rice lager",
+    "abv": 5.0,
+    "bu": 17,
+    "ebc": 3.2,
+    "colour": "#e8e8e8",
+    "blurb": "Crisp and clean. Karakuchi is Japanese for a dry, sharp taste: a light body, a bitterness that snaps off fast and a bone dry finish.",
+    "notes": [
+      "Crisp",
+      "Light body",
+      "Grainy",
+      "Bone dry finish"
+    ],
+    "flag": "At least 36 days in the cellar, our longest rest",
+    "map": [
+      60,
+      -60,
+      "start"
+    ],
+    "theme": {
+      "surface": "#f5f5f5",
+      "surface2": "#e6e6e6",
+      "text": "#0a0a0a",
+      "muted": "#4a4a4a",
+      "line": "#cfcfcf",
+      "label": "#333333",
+      "accent": "#000000"
+    },
+    "bestWithin": "9 months from packing",
+    "keep": "Store below 25°C, out of direct light",
+    "occasion": "Spicy food and hot days. Anything that needs cooling down.",
+    "formats": [
+      "650 mL bottle",
+      "Can",
+      "Keg"
+    ],
+    "bitterness": "Low",
+    "colourWord": "Pale straw",
+    "madeWith": "Water, barley malt, rice, hops, yeast",
+    "proof": "Malt and rice only. At least 36 days in the cellar, our longest rest.",
+    "beer": "#efd774",
+    "slug": "dry-lager",
+    "tagline": [
+      "Crisp. Clean.",
+      "Gone in a snap."
+    ],
+    "highlight": "Light body and a bitterness that snaps off fast.",
+    "glass": "pilsner"
+  },
+  {
+    "id": "ipa",
+    "img": "bite",
+    "persona": "The Bite",
+    "name": "IPA",
+    "style": "Modern American IPA",
+    "abv": 6.2,
+    "bu": 55,
+    "ebc": 16.6,
+    "colour": "#7a7a7a",
+    "blurb": "Hops up front. Citrus, tropical fruit and resin, then a firm clean bitterness that lingers.",
+    "notes": [
+      "Citrus",
+      "Tropical fruit",
+      "Resin",
+      "Firm bitterness"
+    ],
+    "flag": "Never pasteurised. Kept below 6°C from tank to tap",
+    "map": [
+      0,
+      62,
+      "start"
+    ],
+    "theme": {
+      "surface": "#0a0a0a",
+      "surface2": "#161616",
+      "text": "#f5f5f5",
+      "muted": "#a8a8a8",
+      "line": "#2e2e2e",
+      "label": "#d6d6d6",
+      "accent": "#ffffff"
+    },
+    "bestWithin": "4 months from packing",
+    "keep": "Keep cold, below 6°C, out of light",
+    "occasion": "Slow sipping for the hop crowd. Stands up to rich curries.",
+    "formats": [
+      "650 mL bottle",
+      "Can",
+      "Keg"
+    ],
+    "bitterness": "High",
+    "colourWord": "Amber",
+    "madeWith": "Water, barley malt, hops, yeast",
+    "proof": "Never pasteurised. Kept below 6°C from tank to tap.",
+    "beer": "#c9761f",
+    "slug": "ipa",
+    "tagline": [
+      "All hops.",
+      "Firm bite."
+    ],
+    "highlight": "Citrus, tropical fruit and resin, then a clean bitter finish.",
+    "glass": "tulip"
+  },
+  {
+    "id": "wit",
+    "img": "sunbather",
+    "persona": "The Sunbather",
+    "name": "Witbier",
+    "style": "Belgian witbier",
+    "abv": 4.9,
+    "bu": 13,
+    "ebc": 5.3,
+    "colour": "#d4d4d4",
+    "hazy": true,
+    "blurb": "Soft and easy. Hazy and gently tart, with coriander, orange peel, a touch of clove and a dense white head. Lovely with food.",
+    "notes": [
+      "Coriander",
+      "Orange peel",
+      "Light clove",
+      "Hazy"
+    ],
+    "flag": "Never pasteurised. Kept below 6°C from tank to tap",
+    "map": [
+      62,
+      34,
+      "start"
+    ],
+    "theme": {
+      "surface": "#f5f5f5",
+      "surface2": "#e6e6e6",
+      "text": "#0a0a0a",
+      "muted": "#4a4a4a",
+      "line": "#cfcfcf",
+      "label": "#333333",
+      "accent": "#000000"
+    },
+    "bestWithin": "4 months from packing",
+    "keep": "Keep cold, below 6°C, out of light",
+    "occasion": "A hot afternoon, light bites and long lunches.",
+    "formats": [
+      "650 mL bottle",
+      "Can",
+      "Keg"
+    ],
+    "bitterness": "Low",
+    "colourWord": "Hazy pale gold",
+    "madeWith": "Water, barley malt, wheat, oats, coriander, orange peel, hops, yeast",
+    "proof": "Never pasteurised. Kept below 6°C from tank to tap.",
+    "beer": "#ecd18a",
+    "slug": "witbier",
+    "tagline": [
+      "Soft. Hazy.",
+      "Easy does it."
+    ],
+    "highlight": "Coriander and orange peel with a dense white head.",
+    "glass": "tumbler"
+  }
+]

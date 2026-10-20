@@ -1,0 +1,63 @@
+---
+import '../styles/global.css';
+import Badge from '../components/Badge.astro';
+import { asset } from '../data/site.js';
+
+const {
+  title = 'Rottweiler Brew and Pub',
+  description = 'Four Rottweiler beers, from a soft 4.9% witbier to a 7.5% strong lager. Brewed to one written standard.',
+  gate = true,
+} = Astro.props;
+// Share previews need absolute URLs.
+const abs = (p) => new URL(asset(p), Astro.site).href;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+---
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>{title}</title>
+    <meta name="description" content={description}>
+    <meta name="theme-color" content="#0e0e0e">
+    <link rel="canonical" href={canonical}>
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Rottweiler Brew and Pub">
+    <meta property="og:title" content={title}>
+    <meta property="og:description" content={description}>
+    <meta property="og:url" content={canonical}>
+    <meta property="og:image" content={abs('img/hero.jpg')}>
+    <meta property="og:image:width" content="1680">
+    <meta property="og:image:height" content="944">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href={asset('favicon.svg')} type="image/svg+xml">
+    {gate && (
+      <script is:inline>
+        // Hide the age gate before first paint for visitors who passed it in the last 30 days.
+        try {
+          var t = Number(localStorage.getItem('rw-age-ok'));
+          if (t && Date.now() - t < 30 * 864e5) document.documentElement.classList.add('gate-ok');
+        } catch (e) {}
+      </script>
+    )}
+    <link rel="preload" href={asset('img/hero-dog.png')} as="image" fetchpriority="high">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Brewery',
+      name: 'Rottweiler Brew and Pub',
+      legalName: 'Rottweiler Brew and Pub Private Limited',
+      url: Astro.site.href,
+      logo: abs('favicon.svg'),
+      foundingDate: '2026',
+      address: { '@type': 'PostalAddress', addressLocality: 'Pune', addressRegion: 'Maharashtra', addressCountry: 'IN' },
+    })} />
+  </head>
+  <body>
+    <Badge />
+    <slot />
+    <script>import '../scripts/site.js';</script>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+---
+import { contact, tradeLink } from '../data/site.js';
+---
+<section class="sec trade" id="trade" aria-labelledby="trade-h">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Bars, stores, distributors and canteens</div>
+      <h2 id="trade-h">Put Rottweiler <em class="g">on your list.</em></h2>
+      <p>Two lagers that keep well on the shelf. An IPA and a witbier that pour best fresh from a cold keg. Here is how we start working together.</p>
+      <ol class="steps">
+        <li><b>Tell us about your venue</b><span>What you run and where you are.</span></li>
+        <li><b>Get the trade sheet and terms</b><span>Specs, formats, storage and cold chain needs for every beer.</span></li>
+        <li><b>Agree your first order</b><span>We plan delivery around how you store and serve.</span></li>
+      </ol>
+      <div class="btns">
+        <a class="btn solid" href={tradeLink} target="_blank" rel="noopener">Message our trade team <span aria-hidden="true">&rarr;</span></a>
+        <a class="btn ghost" href="trade-sheet/">View the trade sheet</a>
+      </div>
+    </div>
+    <div class="rows">
+      <div class="row"><div><span class="k">Registered office</span><span class="v">{contact.office}</span></div></div>
+    </div>
+  </div>
+</section>

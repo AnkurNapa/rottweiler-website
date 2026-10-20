@@ -1,0 +1,38 @@
+---
+import Base from '../layouts/Base.astro';
+import beers from '../data/beers.json';
+import { tradeLink } from '../data/site.js';
+// One page a buyer can read, print or save. Pricing and pack sizes are added once confirmed.
+---
+<Base title="Trade sheet · Rottweiler Brew and Pub" description="Specs, formats, storage and cold chain needs for every Rottweiler beer." gate={false}>
+  <main class="doc light sheet">
+    <div class="wrap">
+      <a class="back" href="../">&larr; Back to the site</a>
+      <h1>Rottweiler trade sheet</h1>
+      <p>Four beers brewed to one written standard. Prices, pack sizes and terms on request.</p>
+      <div class="tbl">
+        <table>
+          <thead><tr><th scope="col">Beer</th><th scope="col">Style</th><th scope="col">ABV</th><th scope="col">Bitterness</th><th scope="col">Colour</th><th scope="col">Formats</th><th scope="col">Keep</th><th scope="col">Best within</th></tr></thead>
+          <tbody>
+            {beers.map((b) => (
+              <tr>
+                <th scope="row">Rottweiler {b.name}</th>
+                <td>{b.style}</td>
+                <td>{b.abv.toFixed(1)}%</td>
+                <td>{b.bitterness} · {b.bu} BU</td>
+                <td>{b.colourWord}</td>
+                <td>{b.formats.join(', ')}</td>
+                <td>{b.keep}</td>
+                <td>{b.bestWithin}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <h2>Cold chain</h2>
+      <p>The IPA and the Witbier are never pasteurised. They must stay below 6°C in every format, from our cellar to your tap or shelf. Kegs travel chilled. The two lagers keep below 25°C, out of direct light.</p>
+      <h2>Talk to us</h2>
+      <p><a href={tradeLink} target="_blank" rel="noopener">Message our trade team on WhatsApp</a></p>
+    </div>
+  </main>
+</Base>

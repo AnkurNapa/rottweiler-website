@@ -1,0 +1,8 @@
+---
+import beers from '../data/beers.json';
+// Rendered twice so the loop scrolls seamlessly to -50%.
+const items = [...beers, ...beers];
+---
+<div class="ticker" aria-hidden="true">
+  <div>{items.map((b) => <span>{b.persona} <b>·</b> {b.name} <b>{b.abv.toFixed(1)}%</b></span>)}</div>
+</div>

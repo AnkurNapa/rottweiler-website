@@ -1,0 +1,68 @@
+---
+import beers from '../data/beers.json';
+import { asset, pourLink } from '../data/site.js';
+
+// Each answer awards points to beers as "id:points". The last question counts double because it asks about taste directly.
+const questions = [
+  { q: "What's on the plate?", a: [
+    ['Spicy Indian food', 'dry:2,wit:1'],
+    ['Something off the grill', 'strong:2,ipa:1'],
+    ['Light bites and snacks', 'wit:2,dry:1'],
+    ['Just the beer, thanks', 'ipa:2,strong:1'],
+  ] },
+  { q: "What's the moment?", a: [
+    ['A hot afternoon', 'wit:2,dry:1'],
+    ['A long, slow evening', 'strong:2,ipa:1'],
+    ['Dinner with friends', 'dry:2,wit:1'],
+    ['Something to savour', 'ipa:2,strong:1'],
+  ] },
+  { q: 'How do you like it?', a: [
+    ['Easy and crisp', 'dry:4'],
+    ['Smooth and full', 'strong:4'],
+    ['Bitter and hoppy', 'ipa:4'],
+    ['Soft and spiced', 'wit:4'],
+  ] },
+];
+---
+<section class="sec finder light" id="finder" aria-labelledby="finder-h">
+  <div class="wrap">
+    <div class="head">
+      <div><div class="eyebrow">Pick your dog</div><h2 id="finder-h">Which Rottweiler <em class="g">are you?</em></h2></div>
+      <p>Three quick questions. We will match you with one beer from the pack.</p>
+    </div>
+    <form class="quiz" id="quiz">
+      {questions.map((item, qi) => (
+        <fieldset>
+          <legend><span>{qi + 1} of {questions.length}</span>{item.q}</legend>
+          <div class="opts">
+            {item.a.map(([label, score], ai) => (
+              <label><input type="radio" name={`q${qi}`} id={`q${qi}a${ai}`} value={score} required /><span>{label}</span></label>
+            ))}
+          </div>
+        </fieldset>
+      ))}
+      <button class="btn solid" type="submit">Find my dog <span aria-hidden="true">&rarr;</span></button>
+    </form>
+    <div class="match" id="match" hidden aria-live="polite">
+      {beers.map((b) => (
+        <article class="match-card" data-beer={b.id} hidden style={`--c:${b.colour}`}>
+          <img src={asset(`img/${b.img}.jpg`)} alt={b.persona} width="1136" height="1408" loading="lazy" />
+          <div>
+            <div class="eyebrow">Your dog is</div>
+            <h3 tabindex="-1">{b.persona}</h3>
+            <p class="pour-line">Your pour: <b>Rottweiler {b.name}</b> · {b.abv.toFixed(1)}%</p>
+            <p>{b.occasion}</p>
+            <div class="btns">
+              <a class="btn solid" href={`#beer-${b.id}`}>See the beer</a>
+              <a class="btn ghost" href={pourLink(`Rottweiler ${b.name}`)} target="_blank" rel="noopener">Tell me when it pours</a>
+            </div>
+            <div class="btns minor">
+              <button class="link share" type="button" data-share={`My Rottweiler is ${b.persona}. Which one are you? For adults of legal drinking age.`}>Share my dog</button>
+              <button class="link again" type="button">Try again</button>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

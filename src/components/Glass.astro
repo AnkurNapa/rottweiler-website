@@ -1,0 +1,40 @@
+---
+// Extras starting with ~ are drawn faint (facets, highlights).
+// Outline glass icon in the right shape for each style. It takes the text colour: white on black, black on white.
+const { beer: b, size = 'md' } = Astro.props;
+
+const SHAPES = {
+  mug: {
+    name: 'a handled mug', short: 'Mug',
+    body: 'M16 16 H56 V124 Q56 130 50 130 H22 Q16 130 16 124 Z',
+    extras: ['M56 42 H64 Q72 42 72 52 V90 Q72 100 64 100 H56', '~M24 30 V118'],
+    top: 34, foam: [18, 18],
+  },
+  pilsner: {
+    name: 'a tall pilsner glass', short: 'Pilsner',
+    body: 'M24 6 H56 L48 110 Q47 114 43 114 H37 Q33 114 32 110 Z',
+    extras: ['M40 114 V126', 'M27 130 H53', '~M30 18 L35 100'],
+    top: 26, foam: [8, 20],
+  },
+  tulip: {
+    name: 'a tulip glass', short: 'Tulip',
+    body: 'M28 8 Q23 20 21 34 Q19 62 34 76 Q38 79 40 79 Q42 79 46 76 Q61 62 59 34 Q57 20 52 8 Z',
+    extras: ['M40 79 V120', 'M26 126 Q40 120 54 126', '~M27 26 Q25 44 30 60'],
+    top: 30, foam: [10, 22],
+  },
+  tumbler: {
+    name: 'a hexagonal witbier tumbler', short: 'Tumbler',
+    body: 'M14 20 H66 L61 124 Q60.6 130 55 130 H25 Q19.4 130 19 124 Z',
+    extras: ['~M32 20 L33 130', '~M48 20 L47 130', '~M20 116 H60'],
+    top: 38, foam: [22, 18],
+  },
+};
+const s = SHAPES[b.glass];
+---
+<figure class:list={['glassware', `glassware-${size}`]}>
+  <svg viewBox="0 0 80 140" role="img" aria-label={`Rottweiler ${b.name} in ${s.name}`}>
+    <path class="line" d={s.body} />
+    {s.extras.map((d) => <path class:list={['line', { faint: d.startsWith('~') }]} d={d.replace('~', '')} />)}
+  </svg>
+  <figcaption>{s.short}</figcaption>
+</figure>

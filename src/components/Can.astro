@@ -1,0 +1,41 @@
+---
+// A drawn can render: black aluminium with cylindrical shading, the paw badge and a band in the beer's own colour.
+const { beer: b, size = 'lg' } = Astro.props;
+const id = `can-${b.id}-${size}`;
+---
+<svg class:list={['can', `can-${size}`]} viewBox="0 0 220 400" role="img" aria-label={`A can of Rottweiler ${b.name}`}>
+  <defs>
+    <linearGradient id={`${id}-body`} x1="0" x2="1">
+      <stop offset="0" stop-color="#050505" />
+      <stop offset=".18" stop-color="#2a2a2a" />
+      <stop offset=".3" stop-color="#5a5a5a" />
+      <stop offset=".38" stop-color="#1c1c1c" />
+      <stop offset=".8" stop-color="#121212" />
+      <stop offset="1" stop-color="#030303" />
+    </linearGradient>
+    <linearGradient id={`${id}-band`} x1="0" x2="1">
+      <stop offset="0" stop-color={b.beer} stop-opacity=".55" />
+      <stop offset=".3" stop-color={b.beer} />
+      <stop offset=".4" stop-color="#fff" stop-opacity=".9" />
+      <stop offset=".46" stop-color={b.beer} />
+      <stop offset="1" stop-color={b.beer} stop-opacity=".5" />
+    </linearGradient>
+    <linearGradient id={`${id}-lid`} x1="0" x2="1">
+      <stop offset="0" stop-color="#6b6b6b" /><stop offset=".35" stop-color="#e8e8e8" /><stop offset=".6" stop-color="#9a9a9a" /><stop offset="1" stop-color="#4a4a4a" />
+    </linearGradient>
+    <clipPath id={`${id}-clip`}><path d="M24 34 Q24 22 40 20 H180 Q196 22 196 34 V372 Q196 384 180 386 H40 Q24 384 24 372 Z" /></clipPath>
+  </defs>
+  <ellipse cx="110" cy="392" rx="96" ry="7" fill="rgba(255,255,255,.08)" />
+  <path d="M30 22 Q32 8 60 6 H160 Q188 8 190 22 Z" fill={`url(#${id}-lid)`} />
+  <g clip-path={`url(#${id}-clip)`}>
+    <rect x="0" y="0" width="220" height="400" fill={`url(#${id}-body)`} />
+    <rect x="0" y="292" width="220" height="40" fill={`url(#${id}-band)`} />
+    <use href="#badge" x="80" y="58" width="60" height="60" />
+    <text x="110" y="148" text-anchor="middle" class="can-brand">ROTTWEILER</text>
+    <text x="110" y="196" text-anchor="middle" class="can-name" style={`font-size:${b.name.length > 9 ? 19 : 25}px`}>{b.name.toUpperCase()}</text>
+    <text x="110" y="222" text-anchor="middle" class="can-style">{b.style.toUpperCase()}</text>
+    <text x="110" y="318" text-anchor="middle" class="can-abv">{b.abv.toFixed(1)}% ABV</text>
+    <text x="110" y="364" text-anchor="middle" class="can-persona">{b.persona.toUpperCase()}</text>
+    <rect x="58" y="0" width="14" height="400" fill="#fff" opacity=".07" />
+  </g>
+</svg>

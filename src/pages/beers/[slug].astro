@@ -1,0 +1,114 @@
+---
+import Base from '../../layouts/Base.astro';
+import AgeGate from '../../components/AgeGate.astro';
+import Can from '../../components/Can.astro';
+import Glass from '../../components/Glass.astro';
+import Footer from '../../components/Footer.astro';
+import beers from '../../data/beers.json';
+import { asset, pourLink } from '../../data/site.js';
+
+export function getStaticPaths() {
+  return beers.map((beer) => ({ params: { slug: beer.slug }, props: { beer } }));
+}
+const { beer: b } = Astro.props;
+const others = beers.filter((x) => x.id !== b.id);
+const cold = b.id === 'ipa' || b.id === 'wit';
+const stats = [
+  [`${b.abv.toFixed(1)}%`, 'alcohol by volume.'],
+  [`${b.bu}`, `bitterness units. ${b.bitterness} on the tongue.`],
+  [b.bestWithin.split(' ')[0], 'months at its best, from packing.'],
+  [cold ? '6°C' : '25°C', cold ? 'or colder, always. Never pasteurised.' : 'or cooler, out of direct light.'],
+];
+---
+<Base title={`Rottweiler ${b.name} · ${b.tagline.join(' ')}`} description={`${b.persona}. ${b.blurb}`}>
+  <AgeGate />
+  <nav class="pnav" aria-label={`Rottweiler ${b.name}`}>
+    <div class="wrap">
+      <a class="pnav-name" href={asset('')}><svg aria-hidden="true"><use href="#badge"/></svg>Rottweiler {b.name}</a>
+      <div class="pnav-links">
+        <a href="#overview">Overview</a><a href="#taste">Taste</a><a href="#specs">Specs</a>
+        <a class="pill" href={pourLink(`Rottweiler ${b.name}`)} target="_blank" rel="noopener">Tell me when it pours</a>
+      </div>
+    </div>
+  </nav>
+  <main class="product" style={`--beer:${b.beer}`}>
+    <section class="p-hero" id="overview">
+      <p class="p-kicker">{b.persona}</p>
+      <h1>Rottweiler {b.name}</h1>
+      <p class="p-tag"><span>{b.tagline[0]}</span> <span class="grad">{b.tagline[1]}</span></p>
+      <div class="p-can"><Can beer={b} /></div>
+      <a class="pill big" href={pourLink(`Rottweiler ${b.name}`)} target="_blank" rel="noopener">Tell me when it pours</a>
+      <p class="p-note">Launching soon in Pune · {b.formats.join(' · ')}</p>
+    </section>
+
+    <section class="p-highlights" aria-labelledby="hl">
+      <div class="wrap"><h2 id="hl">Get the highlights.</h2></div>
+      <div class="cards">
+        <article class="card dog"><img src={asset(`img/${b.img}.jpg`)} alt={`${b.persona}, the Rottweiler for ${b.name}`} width="1136" height="1408" loading="lazy"><p><b>{b.persona}.</b> {b.highlight}</p></article>
+        <article class="card"><p class="big-num">{b.abv.toFixed(1)}%</p><p><b>{b.style}.</b> {b.blurb}</p></article>
+        <article class="card"><p class="big-num">{b.bu}<small> BU</small></p><p><b>{b.bitterness} bitterness.</b> {b.notes.join(', ')}.</p></article>
+        <article class="card"><p class="big-num small-num">{b.flag.split('.')[0]}.</p><p><b>Proof, not promises.</b> {b.proof}</p></article>
+      </div>
+    </section>
+
+    <section class="p-statement">
+      <div class="wrap">
+        <h2>{b.persona}.<br><span class="grad">{b.tagline.join(' ')}</span></h2>
+        <p>{b.blurb}</p>
+      </div>
+    </section>
+
+    <section class="p-taste" id="taste" aria-labelledby="taste-h">
+      <div class="wrap">
+        <div class="p-glass">
+          <Glass beer={b} size="lg" />
+        </div>
+        <div>
+          <h2 id="taste-h">How it tastes.</h2>
+          <ul class="p-notes">{b.notes.map((n) => <li>{n}</li>)}</ul>
+          <p><b>Best for.</b> {b.occasion}</p>
+          <p><b>Colour.</b> {b.colourWord}.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="p-stats" aria-label="By the numbers">
+      <div class="wrap">
+        {stats.map(([n, l]) => <div><p class="big-num">{n}</p><p>{l}</p></div>)}
+      </div>
+    </section>
+
+    <section class="p-specs" id="specs" aria-labelledby="specs-h">
+      <div class="wrap">
+        <h2 id="specs-h">Specs.</h2>
+        <dl>
+          <div><dt>Style</dt><dd>{b.style}</dd></div>
+          <div><dt>Alcohol</dt><dd>{b.abv.toFixed(1)}% ABV</dd></div>
+          <div><dt>Bitterness</dt><dd>{b.bitterness} · {b.bu} BU</dd></div>
+          <div><dt>Colour</dt><dd>{b.colourWord}</dd></div>
+          <div><dt>Made with</dt><dd>{b.madeWith}. Contains gluten.</dd></div>
+          <div><dt>Formats</dt><dd>{b.formats.join(' · ')}</dd></div>
+          <div><dt>Keep</dt><dd>{b.keep}</dd></div>
+          <div><dt>Best within</dt><dd>{b.bestWithin}</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="p-pack" aria-labelledby="pack-h">
+      <div class="wrap">
+        <h2 id="pack-h">Meet the rest of the pack.</h2>
+        <div class="p-others">
+          {others.map((o) => (
+            <a href={asset(`beers/${o.slug}/`)}>
+              <Can beer={o} size="sm" />
+              <b>Rottweiler {o.name}</b>
+              <span>{o.persona} · {o.abv.toFixed(1)}%</span>
+              <span class="more">Learn more &rsaquo;</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Base>

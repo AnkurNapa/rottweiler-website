@@ -1,0 +1,19 @@
+---
+import { sections } from '../data/site.js';
+---
+<nav class="top" aria-label="Main navigation">
+  <div class="wrap">
+    <a class="lockup" href="#top"><svg aria-hidden="true"><use href="#badge"/></svg><span><b>ROTTWEILER</b><small>Brew and Pub</small></span></a>
+    <ul>
+      {sections.map((s) => <li><a href={`#${s.id}`}>{s.label}</a></li>)}
+    </ul>
+    <a class="nav-join" href="#find">Join the pack</a>
+    <details class="menu" id="menu">
+      <summary>Menu</summary>
+      <div>
+        {sections.map((s) => <a href={`#${s.id}`}>{s.label}</a>)}
+        <a href="#find">Join the pack</a>
+      </div>
+    </details>
+  </div>
+</nav>

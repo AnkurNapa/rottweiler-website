@@ -1,0 +1,13 @@
+---
+import beers from '../data/beers.json';
+import BeerRow from './BeerRow.astro';
+---
+<section class="sec pack" id="pack" aria-labelledby="pack-h">
+  <div class="wrap">
+    <div class="head">
+      <div><div class="eyebrow">The pack</div><h2 id="pack-h">Four beers. <em class="g">Four characters.</em></h2></div>
+      <p>Two rice lagers for every day, an IPA with bite and a hazy witbier for the heat. Pick the dog that suits your mood.</p>
+    </div>
+  </div>
+</section>
+{beers.map((beer) => <BeerRow beer={beer} />)}
