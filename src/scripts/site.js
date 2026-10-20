@@ -85,6 +85,7 @@ if (quiz && match) {
     const answers = [...quiz.querySelectorAll('input:checked')].map((i) => i.value);
     const id = pickBeer(answers, cards.map((c) => c.dataset.beer));
     cards.forEach((c) => { c.hidden = c.dataset.beer !== id; });
+    document.dispatchEvent(new CustomEvent('rw:quiz', { detail: id }));
     quiz.hidden = true;
     match.hidden = false;
     match.scrollIntoView({ behavior: 'smooth', block: 'start' });

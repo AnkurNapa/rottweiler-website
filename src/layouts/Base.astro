@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import Badge from '../components/Badge.astro';
+import Analytics from '../components/Analytics.astro';
 import { asset } from '../data/site.js';
 
 const {
@@ -58,6 +59,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
   <body>
     <Badge />
     <slot />
+    <Analytics />
     <script>import '../scripts/site.js';</script>
   </body>
 </html>

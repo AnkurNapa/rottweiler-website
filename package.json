@@ -7,7 +7,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "test": "node src/scripts/finder.test.mjs && node src/scripts/gate.test.mjs && astro build && node src/scripts/banned.test.mjs"
+    "test": "node src/scripts/finder.test.mjs && node src/scripts/gate.test.mjs && node src/scripts/nav.test.mjs && astro build && node src/scripts/banned.test.mjs"
   },
   "dependencies": {
     "astro": "^5.18.2"

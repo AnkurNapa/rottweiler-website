@@ -1,0 +1,39 @@
+---
+import Base from '../layouts/Base.astro';
+import AgeGate from '../components/AgeGate.astro';
+import Footer from '../components/Footer.astro';
+import { asset } from '../data/site.js';
+---
+<Base title="Ankur Napa, Founder · Rottweiler Brew and Pub" description="A brewer who learnt to read the numbers. Why every Rottweiler beer is made to one written standard.">
+  <AgeGate />
+  <nav class="pnav" aria-label="Founder">
+    <div class="wrap">
+      <a class="pnav-name" href={asset('')}><svg aria-hidden="true"><use href="#badge"/></svg>Rottweiler</a>
+      <div class="pnav-links"><a href={asset('')}>Home</a><a href={asset('blog/')}>Journal</a><a class="pill" href={asset('#find')}>Join the pack</a></div>
+    </div>
+  </nav>
+  <main class="journal post">
+    <article>
+      <header class="wrap post-head">
+        <span class="j-cat">Founder's story</span>
+        <h1>From the brew floor to Rottweiler.</h1>
+        <p class="post-dek">I am a brewer who learnt to read the numbers. Rottweiler is where the two meet.</p>
+      </header>
+      <figure class="post-hero wrap founder-hero"><img src={asset('img/founder.jpg')} alt="Ankur Napa, founder of Rottweiler Brew and Pub" width="900" height="962" /></figure>
+      <div class="wrap prose">
+        <h2>Pune, where it started</h2>
+        <p>I studied biotechnology, then came to Pune for an MSc in Brewing Science and Technology. Pune is where I first learnt how malt, water, hops and yeast turn into beer. It is also where Rottweiler begins.</p>
+        <h2>Eight years on the brew floor</h2>
+        <p>From 2011 to 2020 I worked as an R&amp;D master brewer at AB InBev in India. That is where I learnt what consistency really costs. A great beer once is easy. The same great beer every time, at every brewery, takes discipline.</p>
+        <h2>Then I learnt the numbers</h2>
+        <p>Along the way I started analysing production data to find out why some batches ran better than others. That pulled me into data and analytics. I went on to build data platforms for beer, whisky and wine producers. I also teach. Since 2021 I have trained more than 200 students at Craft Beer School.</p>
+        <h2>Why Rottweiler</h2>
+        <p>Rottweiler brings both worlds together. Every one of our four beers is brewed to one written standard, the same at every site. Every batch is checked against that standard before it leaves. The lagers rest at least 30 days in a cold cellar. The IPA and the Witbier are never pasteurised and stay cold from tank to tap.</p>
+        <p>The dog says what I care about. Calm until it matters. Loyal to a standard. No shortcuts.</p>
+        <p>I hope you enjoy the beer as much as we enjoy making it.</p>
+        <p class="sign">Ankur Napa<br>Founder, Rottweiler Brew and Pub</p>
+      </div>
+    </article>
+  </main>
+  <Footer />
+</Base>
