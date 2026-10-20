@@ -9,7 +9,7 @@ export const contact = {
 };
 
 // Google Analytics 4 measurement ID, for example 'G-ABC123XYZ'. Leave empty to switch analytics off.
-export const gaId = '';
+export const gaId = 'G-1ZHW47YJDC';
 
 export const sections = [
   { id: 'story', label: 'Our story' },
