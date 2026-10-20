@@ -112,3 +112,13 @@ if (quiz && match) {
     btn.textContent = label;
   });
 }
+
+// Phone beer carousel: light the dot for the card in view.
+const track = document.getElementById('swipe-track');
+if (track) {
+  const dots = [...document.querySelectorAll('.swipe-dots i')];
+  track.addEventListener('scroll', () => {
+    const i = Math.round(track.scrollLeft / track.firstElementChild.offsetWidth);
+    dots.forEach((d, k) => d.classList.toggle('on', k === i));
+  }, { passive: true });
+}

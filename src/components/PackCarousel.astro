@@ -1,0 +1,22 @@
+---
+import beers from '../data/beers.json';
+import { asset } from '../data/site.js';
+import Glass from './Glass.astro';
+// Phone only: the four beers as a swipeable row of rounded cards, after Apple's "Get the highlights".
+---
+<div class="pack-swipe" aria-label="The four beers">
+  <div class="swipe-track" id="swipe-track">
+    {beers.map((b) => (
+      <a class="swipe-card" href={asset(`beers/${b.slug}/`)}>
+        <img src={asset(`img/${b.img}.jpg`)} alt="" width="1136" height="1408" loading="lazy" />
+        <div class="swipe-copy">
+          <span class="swipe-persona">{b.persona}</span>
+          <b>Rottweiler {b.name}</b>
+          <span>{b.style} · {b.abv.toFixed(1)}%</span>
+          <span class="swipe-cta">Explore <i aria-hidden="true">+</i></span>
+        </div>
+      </a>
+    ))}
+  </div>
+  <div class="swipe-dots" aria-hidden="true">{beers.map((_, i) => <i class:list={{ on: i === 0 }}></i>)}</div>
+</div>
