@@ -1,0 +1,49 @@
+---
+import Base from '../../layouts/Base.astro';
+import AgeGate from '../../components/AgeGate.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection } from 'astro:content';
+import { asset } from '../../data/site.js';
+
+const posts = (await getCollection('blog')).sort((a, b) => b.data.date - a.data.date);
+const fmt = (d) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+const [lead, ...rest] = posts;
+---
+<Base title="Journal · Rottweiler Brew and Pub" description="Food pairings, dogs and beer, plus stories from the pack.">
+  <AgeGate />
+  <nav class="pnav" aria-label="Journal">
+    <div class="wrap">
+      <a class="pnav-name" href={asset('')}><svg aria-hidden="true"><use href="#badge"/></svg>Rottweiler</a>
+      <div class="pnav-links"><a href={asset('')}>Home</a><a href={asset('#pack')}>The beers</a><a class="pill" href={asset('#find')}>Join the pack</a></div>
+    </div>
+  </nav>
+  <main class="journal">
+    <header class="j-head wrap">
+      <p class="p-kicker">Journal</p>
+      <h1>Food, dogs and beer.</h1>
+      <p>Pairings for the food we actually eat, how to look after the dogs in our lives and stories from the pack.</p>
+    </header>
+    {lead && (
+      <a class="j-lead wrap" href={asset(`blog/${lead.id}/`)}>
+        <img src={asset(lead.data.image)} alt="" width="1136" height="1408" />
+        <div>
+          <span class="j-cat">{lead.data.category} · {fmt(lead.data.date)}</span>
+          <h2>{lead.data.title}</h2>
+          <p>{lead.data.description}</p>
+          <span class="j-more">Read the story &rsaquo;</span>
+        </div>
+      </a>
+    )}
+    <div class="j-grid wrap">
+      {rest.map((p) => (
+        <a class="j-card" href={asset(`blog/${p.id}/`)}>
+          <img src={asset(p.data.image)} alt="" width="1136" height="1408" loading="lazy" />
+          <span class="j-cat">{p.data.category} · {fmt(p.data.date)}</span>
+          <h3>{p.data.title}</h3>
+          <p>{p.data.description}</p>
+        </a>
+      ))}
+    </div>
+  </main>
+  <Footer />
+</Base>

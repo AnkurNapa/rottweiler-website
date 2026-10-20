@@ -61,7 +61,7 @@ const seen = new IntersectionObserver((entries) => entries.forEach((e) => {
 document.querySelectorAll('.beer, .p-taste').forEach((el) => seen.observe(el));
 
 // The nav marks the section in view.
-const links = [...document.querySelectorAll('nav.top ul a')];
+const links = [...document.querySelectorAll('nav.top ul a[href^="#"]')];
 const spy = new IntersectionObserver((entries) => entries.forEach((e) => {
   if (e.isIntersecting) links.forEach((a) => a.setAttribute('aria-current', a.hash === `#${e.target.id}`));
 }), { rootMargin: '-45% 0px -50% 0px' });

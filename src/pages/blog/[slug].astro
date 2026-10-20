@@ -1,0 +1,54 @@
+---
+import Base from '../../layouts/Base.astro';
+import AgeGate from '../../components/AgeGate.astro';
+import Footer from '../../components/Footer.astro';
+import Glass from '../../components/Glass.astro';
+import { getCollection, render } from 'astro:content';
+import beers from '../../data/beers.json';
+import { asset } from '../../data/site.js';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+const { post } = Astro.props;
+const { Content } = await render(post);
+const featured = beers.filter((b) => post.data.beers.includes(b.id));
+const date = post.data.date.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+<Base title={`${post.data.title} · Rottweiler Journal`} description={post.data.description}>
+  <AgeGate />
+  <nav class="pnav" aria-label="Journal">
+    <div class="wrap">
+      <a class="pnav-name" href={asset('')}><svg aria-hidden="true"><use href="#badge"/></svg>Rottweiler</a>
+      <div class="pnav-links"><a href={asset('blog/')}>Journal</a><a href={asset('#pack')}>The beers</a><a class="pill" href={asset('#find')}>Join the pack</a></div>
+    </div>
+  </nav>
+  <main class="journal post">
+    <article>
+      <header class="wrap post-head">
+        <a class="back-link" href={asset('blog/')}>&lsaquo; Journal</a>
+        <span class="j-cat">{post.data.category} · {date}</span>
+        <h1>{post.data.title}</h1>
+        <p class="post-dek">{post.data.description}</p>
+      </header>
+      <figure class="post-hero wrap"><img src={asset(post.data.image)} alt="" width="1136" height="1408" /></figure>
+      <div class="wrap prose"><Content /></div>
+    </article>
+    {featured.length > 0 && (
+      <section class="wrap post-beers" aria-labelledby="pb">
+        <h2 id="pb">The beers in this story.</h2>
+        <div class="post-beer-row">
+          {featured.map((b) => (
+            <a href={asset(`beers/${b.slug}/`)}>
+              <Glass beer={b} />
+              <b>Rottweiler {b.name}</b>
+              <span>{b.persona} · {b.abv.toFixed(1)}%</span>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+  </main>
+  <Footer />
+</Base>
